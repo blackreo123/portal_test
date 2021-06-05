@@ -1,15 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 export default function AccSelect(props) {
     const [textColor, setTextColor] = useState();
-
-    useEffect(()=>{
-        if(props.placeHolder){
-            setTextColor('grey')
-        }else{
-            setTextColor('')
-        }
-    },[props.placeHolder])
 
     const colorChange = () => {
         setTextColor(props.textColor)
@@ -17,15 +9,18 @@ export default function AccSelect(props) {
     return(
         <>
         {props.placeHolder 
+            // props.placeHolderを入れた場合 
             ?   <select onChange={colorChange} disabled = {props.isDisabled} style={{width : props.fieldWidth, color : textColor}}>
-                    <option disabled selected hidden>{props.placeHolder}</option>
+                    {/* props.placeHolderの内容を一つ目の項目に */}
+                    <option>{props.placeHolder}</option>    
                     {props.list.map((item, index) => {
                         return <option key={index} style={{color : 'black'}}>{item}</option>
                     })}
                  </select>
+            // props.placeHolderを入れなかった場合
             :   <select onChange={colorChange} disabled = {props.isDisabled} style={{width : props.fieldWidth, color : textColor}}>
                     {props.list.map((item, index) => {
-                        return <option key={index}>{item}</option>
+                        return <option key={index}　style={{color : 'black'}}>{item}</option>
                     })}
                 </select>    
             }
